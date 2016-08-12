@@ -1,0 +1,24 @@
+#! /usr/bin/env ruby
+
+require_relative '../lib/commands/project_root'
+require_relative '../lib/commands/special_folder'
+
+COMMAND_NAME=ARGV[0]
+
+unless COMMAND_NAME
+  $stderr.puts "Please enter a command on the command line"
+  exit 1
+end
+
+commands = {
+  'project-root' => ProjectRoot,
+  'special-folder' => SpecialFolder,
+}
+
+if command = commands[COMMAND_NAME]
+  command.new.run
+else
+  $stderr.puts "unknown command: '#{COMMAND_NAME}'"
+  exit 1
+end
+
