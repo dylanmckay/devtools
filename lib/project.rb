@@ -9,7 +9,7 @@ module Project
   end
 
   def self.is_git_repository?(path)
-    Dir.exist?("#{path}/.git")
+    [Dir, File].any? { |a| a.exist?("#{path}/.git") }
   end
 end
 
